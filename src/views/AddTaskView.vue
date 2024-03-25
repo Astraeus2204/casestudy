@@ -4,6 +4,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App" />
 
     <!-- Heading for Add Task section -->
+    <h1>Task Management</h1>
     <h2>Add Task</h2>
     <div class="form-group">
       <!-- Input field and button wrapper -->
@@ -20,14 +21,9 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
 import { taskList } from '../data/items.js';
-
 export default {
   name: 'AddTaskView',
-  components: {
-    HelloWorld
-  },
   data() {
     return {
       // Task list data initialized from external source
@@ -138,5 +134,19 @@ export default {
   /* Styles for error message */
   color: #721c24;
   background-color: #f8d7da;
+}
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
 }
 </style>
