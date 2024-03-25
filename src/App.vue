@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <router-link to="/" class="nav-link">Add Task</router-link> || 
-    <router-link to="/taskList" class="nav-link">Task List</router-link> 
+    <router-link to="/taskList" class="nav-links">Task List</router-link> 
   </nav>
   <router-view/>
 </template>
@@ -12,7 +12,7 @@
   padding: 10px;
 }
 
-.nav-link {
+.nav-link, .nav-links {
   color: white;
   text-decoration: none;
   margin-right: 10px;
@@ -21,4 +21,9 @@
 .nav-link:hover {
   color: #42b983;
 }
+
+.nav-links:hover {
+  color: #24aed1;
+}
+
 </style>
