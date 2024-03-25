@@ -52,6 +52,7 @@ export default {
 
 <style scoped>
 .add-task-view {
+  text-align: center;
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
