@@ -114,6 +114,7 @@ export default {
 /* Scoped styles for the TaskList component */
 .task-list-container {
   /* Center the container horizontally */
+  text-align: center;
   max-width: 800px;
   margin: 0 auto;
   /* Add border around the container */
