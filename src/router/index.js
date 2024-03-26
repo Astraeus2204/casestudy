@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import TaskListView from '../views/TaskListView.vue'
-import AddTaskView from '../views/AddTaskView.vue'
+import TaskListView from '../views/TaskListPage.vue'
+import AddTaskView from '../views/AddTaskPage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: AddTaskView // Change to TaskListView
+    component: AddTaskView 
   },
   {
     path: '/taskList',
@@ -14,6 +14,9 @@ const routes = [
     component: TaskListView
   }
 ]
+const taskList = [];
+
+export {taskList};
 
 const router = createRouter({
   history: createWebHistory(),

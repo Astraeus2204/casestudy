@@ -1,3 +1,0 @@
-const taskList = [];
-
-export {taskList};

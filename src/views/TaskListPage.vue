@@ -1,32 +1,49 @@
 <template>
-  <!-- Container for the task list -->
+  <!-- Container with border for the task list -->
   <div class="task-list-container">
-    <!-- Heading for the task list -->
     <h1>Task List</h1>
 
-    <!-- Wrapper for the task list items -->
-    <div class="task-list-wrapper">
-      <ul class="task-list">
+    <!-- Table for the task list -->
+    <table class="task-table">
+      <!-- Table headers -->
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Task Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
         <!-- Loop through each task item -->
-        <li v-for="task in taskList" :key="task.id" class="task-item">
-          <div class="task-details">
-            <!-- Checkbox for task completion status -->
-            <input type="checkbox" v-model="task.completed" class="task-checkbox">
-            <!-- Display task text with optional strike-through if completed -->
-            <span v-if="editedTask !== task.id" :class="{ completed: task.completed }">{{ task.text }}</span>
-            <!-- Input field for editing task text -->
-            <input v-else type="text" v-model="task.text" class="edit-input">
-          </div>
+        <tr v-for="task in taskList" :key="task.id">
+          <!-- Task Description -->
+          <td>
+            <div class="task-details">
+              <!-- Checkbox for task completion status -->
+              <input type="checkbox" v-model="task.completed" class="task-checkbox">
+              <!-- Display task text with optional strike-through if completed -->
+              <span v-if="editedTask !== task.id" :class="{ completed: task.completed }">{{ task.text }}</span>
+              <!-- Input field for editing task text -->
+              <input v-else type="text" v-model="task.text" class="edit-input">
+            </div>
+          </td>
+          <!-- Task Status -->
+          <td>
+            <span :class="{ 'status-completed': task.completed, 'status-pending': !task.completed }">
+              {{ task.completed ? 'Completed' : 'Pending' }}
+            </span>
+          </td>
           <!-- Action buttons for each task item -->
-          <div class="task-actions">
+          <td class="task-actions">
             <!-- Button to toggle between editing and saving task -->
             <button @click="editTask(task)" class="edit-button">{{ editedTask !== task.id ? 'Edit' : 'Save' }}</button>
             <!-- Button to delete the task -->
             <button @click="deleteTask(task)" class="delete-button">Delete</button>
-          </div>
-        </li>
-      </ul>
-    </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
 
     <!-- Message displayed when no tasks are available -->
     <div v-if="taskList.length === 0" class="empty-list-message">
@@ -42,7 +59,7 @@
 </template>
 
 <script>
-import { taskList } from '../data/items.js';
+import { taskList } from '../router/index.js';
 
 export default {
   data() {
@@ -95,32 +112,32 @@ export default {
 
 <style scoped>
 /* Scoped styles for the TaskList component */
-
 .task-list-container {
   /* Center the container horizontally */
   max-width: 800px;
   margin: 0 auto;
-}
-
-.task-list-wrapper {
-  /* Styling for the task list wrapper */
-  border: 1px solid #ddd; /* Add border with a lighter color */
+  /* Add border around the container */
+  border: 1px solid #000000;
   border-radius: 5px;
   padding: 20px; /* Add padding for spacing */
 }
 
-.task-list {
-  /* Remove default list styles */
-  list-style-type: none;
-  padding: 0;
+.task-table {
+  /* Table styles */
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.task-item {
-  /* Layout for each task item */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.task-table th, .task-table td {
+  /* Table header and cell styles */
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.task-table th {
+  /* Table header styles */
+  background-color: #f2f2f2;
+  text-align: left;
 }
 
 .task-details {
@@ -195,5 +212,21 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 5px;
+}
+
+.status-completed {
+  /* Style for completed task status */
+  background-color: #42b983;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.status-pending {
+  /* Style for pending task status */
+  background-color: #ff6347;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
 }
 </style>

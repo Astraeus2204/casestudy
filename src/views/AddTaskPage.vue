@@ -1,60 +1,62 @@
 <template>
+  <!-- Container for the Add Task section -->
   <div class="add-task-view">
-    <!-- HelloWorld component with welcome message -->
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-
     <!-- Heading for Add Task section -->
     <h1>Task Management</h1>
     <h2>Add Task</h2>
+
+    <!-- Input field and button wrapper -->
     <div class="form-group">
-      <!-- Input field and button wrapper -->
+      <!-- Wrapper for input field and button -->
       <div class="input-wrapper">
-        <input type="text" v-model="newTask" placeholder="Enter task" class="task-input">
+        <!-- Input field for entering new task -->
+        <input type="text" v-model="newTask" placeholder="Enter New Task" class="task-input">
+        <!-- Button to add a new task -->
         <button @click="addTask" class="add-button">Add Task</button>
       </div>
+      <!-- Message and Error display -->
+      <!-- Success message displayed when task is added -->
+      <p class="message" v-if="message">{{ message }}</p>
+      <!-- Error message displayed when input is empty -->
+      <p class="error" v-if="error">{{ error }}</p>
     </div>
-
-    <!-- Message and Error display -->
-    <p class="message" v-if="message">{{ message }}</p>
-    <p class="error" v-if="error">{{ error }}</p>
   </div>
 </template>
 
 <script>
-import { taskList } from '../data/items.js';
+import { taskList } from '../router/index.js';
+
 export default {
-  name: 'AddTaskView',
+  name: 'AddTaskPage',
   data() {
     return {
-      // Task list data initialized from external source
-      taskList: taskList,
-      // Error and message states for user feedback
-      error: '',
-      message: '',
-      // Input field for new task
-      newTask: ''
+      // Data properties for AddTaskPage component
+      taskList: taskList, // List of tasks
+      error: '', // Error message
+      message: '', // Success message
+      newTask: '' // New task input
     };
   },
   methods: {
-    // Function to increment task ID (not currently in use)
-    incrementId() {
-      taskList.id++
-    },
-    // Function to add a new task
+    // Method to add a new task
     addTask() {
-      // Validate new task input
+      // Check if new task input is empty
       if (this.newTask.trim() === '') {
-        // Show error if input is empty
-        this.error = "Please enter a task";
+        // Set error message if input is empty
+        this.error = "Please Enter a Task";
       } else {
-        // Clear error if input is valid
+        // Clear error message if input is valid
         this.error = "";
         // Add new task to the task list
         taskList.push({ id: taskList.length + 1, text: this.newTask, completed: false });
         // Clear input field after adding task
         this.newTask = '';
-        // Show success message after adding task
-        this.message = "New task added!";
+        // Set success message after adding task
+        this.message = "New Task Added!";
+        // Hide the message after a short delay
+        setTimeout(() => {
+          this.message = '';
+        }, 2000);
       }
     },
   },
@@ -67,12 +69,13 @@ export default {
 .add-task-view {
   /* Center the component horizontally and provide padding */
   text-align: center;
+  color: #000000;
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   /* Rounded corners, background color, and box shadow for visual appearance */
   border-radius: 8px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -102,7 +105,7 @@ export default {
 .add-button {
   /* Styling for the Add Task button */
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #237550;
   color: white;
   border: none;
   border-radius: 0 5px 5px 0;
@@ -113,7 +116,7 @@ export default {
 
 .add-button:hover {
   /* Change background color on hover */
-  background-color: #45a049;
+  background-color: #368962;
 }
 
 .message,
@@ -134,19 +137,5 @@ export default {
   /* Styles for error message */
   color: #721c24;
   background-color: #f8d7da;
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>
